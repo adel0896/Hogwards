@@ -6,8 +6,11 @@ const allStudents = [];
 
 function start() {
   console.log("ready");
-
+  registerButtons();
   loadJSON();
+}
+function registerButtons() {
+  document.querySelectorAll("[data-action=filter]").forEach((button) => button.addEventListener("click", selectFilter));
 }
 
 function loadJSON() {
@@ -90,24 +93,56 @@ function prepareObjects(jsonData) {
 
     //The image
     if (fullname.indexOf(" ") == -1) {
-      student.image = student.lastname.toLowerCase() + `_${student.firstname.substring(0, 1).toLowerCase()}` + `.png`;
+      let studentlastnamesmall = student.lastname.toLowerCase();
+      student.image = studentlastnamesmall + `_${student.firstname.substring(0, 1).toLowerCase()}` + `.png`;
+      console.log(student.image);
     }
 
     allStudents.push(student);
   });
 
-  displayList();
+  displayList(allStudents);
 }
+function selectFilter(event) {
+  const filter = event.target.dataset.filter;
+  console.log(`user selected ${filter}`);
+  filterList(filter);
+}
+function filterList(filterBy) {
+  let filteredList = allStudents;
+  if (filterBy === "Slytherin") {
+    filteredList = allStudents.filter(isSl);
+  } else if (filterBy === "Gryffindor") {
+    filteredList = allStudents.filter(isGr);
+  } else if (filterBy === "Hufflepuff") {
+    filteredList = allStudents.filter(isHu);
+  } else if (filterBy === "Ravenclaw") {
+    filteredList = allStudents.filter(isRa);
+  }
 
-function displayList() {
+  displayList(filteredList);
+}
+function isSl(student) {
+  return student.house === "Slytherin";
+}
+function isGr(student) {
+  return student.house === "Gryffindor";
+}
+function isHu(student) {
+  return student.house === "Hufflepuff";
+}
+function isRa(student) {
+  return student.house === "Ravenclaw";
+}
+function displayList(students) {
   // clear the list
   document.querySelector("#list tbody").innerHTML = "";
 
   // build a new list
-  allStudents.forEach(displayAnimal);
+  students.forEach(displayStudent);
 }
 
-function displayAnimal(student) {
+function displayStudent(student) {
   // create clone
   const clone = document.querySelector("template#animal").content.cloneNode(true);
 
@@ -122,7 +157,7 @@ function displayAnimal(student) {
   } else if (student.lastname.includes("Patil")) {
     clone.querySelector("[data-field=image] img").src = `images/${student.lastname}_${student.firstname}.png`;
   } else {
-    clone.querySelector("[data-field=image] img").src = `images/${student.lastname}_${student.firstname[0]}.png`;
+    clone.querySelector("[data-field=image] img").src = `images/${student.lastname.toLowerCase()}_${student.firstname[0].toLowerCase()}.png`;
   }
 
   // append clone to list
