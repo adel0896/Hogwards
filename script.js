@@ -153,9 +153,9 @@ function displayStudent(student) {
   clone.querySelector("[data-field=nickname]").textContent = student.nickname;
   clone.querySelector("[data-field=house]").textContent = student.house;
   if (student.lastname.includes("-")) {
-    clone.querySelector("[data-field=image] img").src = `images/${student.lastname.substring(student.lastname.indexOf("-") + 1)}_${student.firstname[0]}.png`;
+    clone.querySelector("[data-field=image] img").src = `images/${student.lastname.substring(student.lastname.indexOf("-") + 1).toLowerCase()}_${student.firstname[0].toLowerCase()}.png`;
   } else if (student.lastname.includes("Patil")) {
-    clone.querySelector("[data-field=image] img").src = `images/${student.lastname}_${student.firstname}.png`;
+    clone.querySelector("[data-field=image] img").src = `images/${student.lastname.toLowerCase()}_${student.firstname.toLowerCase()}.png`;
   } else {
     clone.querySelector("[data-field=image] img").src = `images/${student.lastname.toLowerCase()}_${student.firstname[0].toLowerCase()}.png`;
   }
