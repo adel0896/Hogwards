@@ -4,46 +4,132 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Hogwards</title>
+    <title>Hogwarts</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>Hogwards Student List</h1>
-    <p>
-      Filters:
-      <button class="filter" data-action="filter" data-filter="Slytherin">Slytherin</button>
-      <button class="filter" data-action="filter" data-filter="Gryffindor">Gryffindor</button>
-      <button class="filter" data-action="filter" data-filter="Hufflepuff">Hufflepuff</button>
-      <button class="filter" data-action="filter" data-filter="Ravenclaw">Ravenclaw</button>
-      <button class="filter" data-action="filter" data-filter="Allhouses">All houses</button>
-    </p>
-    <table id="list">
-      <thead>
-        <tr>
-          <th>Firstname</th>
-          <th>Middlename</th>
+    <header>
+      <h1>
+        Hogwarts School of <br />
+        Witchcraft and Wizardry
+      </h1>
+    </header>
+    <main>
+      <p class="filtersline">
+        <button class="filter" data-action="filter" data-filter="Slytherin">Slytherin</button>
+        <button class="filter" data-action="filter" data-filter="Gryffindor">Gryffindor</button>
+        <button class="filter" data-action="filter" data-filter="Allhouses">All houses</button>
+        <button class="filter" data-action="filter" data-filter="Hufflepuff">Hufflepuff</button>
+        <button class="filter" data-action="filter" data-filter="Ravenclaw">Ravenclaw</button>
+      </p>
+      <table id="list">
+        <thead>
+          <tr>
+            <th>Number of students: <span class="nrstudents"></span></th>
+            <!-- <th>Middlename</th>
 
-          <th>Lastname</th>
-          <th>House</th>
-          <th>Nickname</th>
+            <th>Lastname</th>
+            <th>House</th>
+            <th>Nickname</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <!-- students template will be copied and inserted here -->
+        </tbody>
+      </table>
+
+      <template id="student">
+        <!-- <tr data-field="studentcard" data-name="nothing"> -->
+        <tr data-field="studentcard">
+          <td data-field="image"><img src="" class="image" /></td>
+          <td data-field="prefect" data-prefect="false"></td>
+          <td data-field="squad" data-squad="false" class="squad"></td>
+
+          <td data-field="name">NAME</td>
+          <td data-field="type">TYPE</td>
+          <td data-field="desc">DESCRIPTION</td>
+          <td data-field="house">HOUSE</td>
+          <td data-field="nickname">NICKNAME</td>
+          <td data-field="status" data-status="false"><button id="expell">Expell</button></td>
+
+          <td data-field="imagehouse"><img src="" class="imagehouse" /></td>
         </tr>
-      </thead>
-      <tbody>
-        <!-- students template will be copied and inserted here -->
-      </tbody>
-    </table>
+        <!-- <button data-field="details">See details</button> -->
+      </template>
+      <div id="remove_other" class="warning hidden">
+        <div class="dialog">
+          <button class="closebutton">X</button>
+          <h1>Warning!</h1>
+          <p>
+            There can only be a prefect from each house <br />
+            Do you want to remove the other prefect?
+          </p>
+          <button id="removeother">Remove <span data-field="otherprefect">other</span></button>
+        </div>
+      </div>
+      <div id="remove_aorb" class="warning hidden">
+        <div class="dialog">
+          <button class="closebutton">X</button>
+          <h1>Warning!</h1>
+          <p>
+            There can not be any more than two prefects. <br />
+            Do you want to remove on of the existing?
+          </p>
+          <div class="sidebyside">
+            <button id="removeA">Remove <span data-field="prefectA">A</span></button>
+            <button id="removeB">Remove <span data-field="prefectB">B</span></button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <aside>
+      <input class="searchbar" type="text" placeholder="Search" />
+      <div class="expelledcontainer">
+        <label for="expelled"
+          >Expelled <span class="expellednumber"></span>
 
-    <template id="animal">
-      <tr>
-        <td data-field="name">NAME</td>
-        <td data-field="type">TYPE</td>
-        <td data-field="desc">DESCRIPTION</td>
-        <td data-field="house">HOUSE</td>
-        <td data-field="nickname">NICKNAME</td>
-        <td data-field="image"><img src="" class="image" /></td>
-      </tr>
-    </template>
+          <input class="expelled filter" type="checkbox" name="expelled" data-action="filter" data-filter="expelled" />
+        </label>
+        <label for="unexpelled"
+          >Unexpelled <span class="unexpellednumber"></span>
+          <input class="unexpelled filter" type="checkbox" name="unexpelled" data-action="filter" data-filter="unexpelled" />
+        </label>
+      </div>
+      <p class="title">Sort by:</p>
+      <div class="sortbutt">
+        <button class="sort" data-action="sort" data-sort="firstname" data-sort-direction="asc">First Name</button>
+        <button class="sort" data-action="sort" data-sort="lastname" data-sort-direction="asc">Last Name</button>
+        <button class="sort" data-action="sort" data-sort="house" data-sort-direction="asc">House</button>
+        <button class="sort" data-action="sort" data-sort="prefect" data-sort-direction="asc">Prefects</button>
+      </div>
+      <!-- <button class="sort" data-action="sort" data-sort="prefects">Prefects</button> -->
+    </aside>
+    <footer></footer>
+    <!-- <template id="studentpop"> -->
+    <div class="box hide" data-field="studentcard">
+      <img data-field="imagepop" src="" class="imagepop" />
+      <img data-field="imagehousepop" src="" class="imagehousepop" />
 
+      <p data-field="namepop">NAME</p>
+      <p data-field="bloodtype">BLOODTYPE</p>
+      <p data-field="housepop">HOUSE</p>
+      <p data-field="nicknamepop">NICKNAME</p>
+      <p data-field="expelled">EXPELLED</p>
+      <p data-field="inq">Inqusitioral squad</p>
+      <p data-field="prefect">Prefect</p>
+      <!-- <p data-field="status" data-status="false"><button id="expell">Expell</button></p> -->
+
+      <!-- <button>Expell</button> -->
+      <button class="close">X</button>
+    </div>
+    <div id="notAllowed" class="dialog2 hidden">
+      <div class="dialogcontent">
+        <button class="closebutton">X</button>
+        <h1 class="title">Oops!</h1>
+        <h1>This student is not allowed to be part of the Inquisitorial Squad!</h1>
+      </div>
+    </div>
+    <!-- </template> -->
     <script src="script.js"></script>
   </body>
 </html>
