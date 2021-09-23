@@ -42,6 +42,7 @@
         <!-- <tr data-field="studentcard" data-name="nothing"> -->
         <tr data-field="studentcard">
           <td data-field="image"><img src="" class="image" /></td>
+
           <td data-field="prefect" data-prefect="false"></td>
           <td data-field="squad" data-squad="false" class="squad"></td>
 
@@ -50,9 +51,10 @@
           <td data-field="desc">DESCRIPTION</td>
           <td data-field="house">HOUSE</td>
           <td data-field="nickname">NICKNAME</td>
-          <td data-field="status" data-status="false"><button id="expell">Expell</button></td>
+          <td id="expelll" data-field="status" data-status="false"></td>
+          <!-- <button id="expell"></button> -->
 
-          <td data-field="imagehouse"><img src="" class="imagehouse" /></td>
+          <!-- <td data-field="imagehouse"><img src="" class="imagehouse" /></td> -->
         </tr>
         <!-- <button data-field="details">See details</button> -->
       </template>
@@ -85,15 +87,12 @@
     <aside>
       <input class="searchbar" type="text" placeholder="Search" />
       <div class="expelledcontainer">
-        <label for="expelled"
-          >Expelled <span class="expellednumber"></span>
+        <p class="title">Filter by:</p>
 
-          <input class="expelled filter" type="checkbox" name="expelled" data-action="filter" data-filter="expelled" />
-        </label>
-        <label for="unexpelled"
-          >Unexpelled <span class="unexpellednumber"></span>
-          <input class="unexpelled filter" type="checkbox" name="unexpelled" data-action="filter" data-filter="unexpelled" />
-        </label>
+        <button class="expelled filter" data-action="filter" data-filter="expelled">Expelled</button>
+        <button class="unexpelled filter" data-action="filter" data-filter="unexpelled">Unexpelled</button>
+        <button class="filter" data-action="filter" data-filter="pure">Pure-blood</button>
+        <button class="filter" data-action="filter" data-filter="half">Half-blood</button>
       </div>
       <p class="title">Sort by:</p>
       <div class="sortbutt">
@@ -101,6 +100,7 @@
         <button class="sort" data-action="sort" data-sort="lastname" data-sort-direction="asc">Last Name</button>
         <button class="sort" data-action="sort" data-sort="house" data-sort-direction="asc">House</button>
         <button class="sort" data-action="sort" data-sort="prefect" data-sort-direction="asc">Prefects</button>
+        <button class="sort" data-action="sort" data-sort="blood" data-sort-direction="asc">Blood-status</button>
       </div>
       <!-- <button class="sort" data-action="sort" data-sort="prefects">Prefects</button> -->
     </aside>
@@ -109,26 +109,43 @@
     <div class="box hide" data-field="studentcard">
       <img data-field="imagepop" src="" class="imagepop" />
       <img data-field="imagehousepop" src="" class="imagehousepop" />
-
-      <p data-field="namepop">NAME</p>
-      <p data-field="bloodtype">BLOODTYPE</p>
-      <p data-field="housepop">HOUSE</p>
-      <p data-field="nicknamepop">NICKNAME</p>
-      <p data-field="expelled">EXPELLED</p>
-      <p data-field="inq">Inqusitioral squad</p>
-      <p data-field="prefect">Prefect</p>
+      <div class="data">
+        <p data-field="namepop">NAME</p>
+        <p data-field="lastnamepop">LASTNAME</p>
+        <p data-field="gender">GENDER</p>
+        <p data-field="bloodtype">BLOODTYPE</p>
+        <p data-field="housepop">HOUSE</p>
+        <p data-field="nicknamepop">NICKNAME</p>
+      </div>
+      <div class="statuses">
+        <p data-field="expelled">Expelled</p>
+        <span class="checkexp"></span>
+        <p data-field="inq">Inqusitioral squad</p>
+        <span class="checkinq"></span>
+        <p data-field="prefect">Prefect</p>
+        <span class="checkpre"></span>
+      </div>
       <!-- <p data-field="status" data-status="false"><button id="expell">Expell</button></p> -->
 
       <!-- <button>Expell</button> -->
       <button class="close">X</button>
     </div>
-    <div id="notAllowed" class="dialog2 hidden">
-      <div class="dialogcontent">
+    <div id="notAllowed" class="warning hidden">
+      <div class="dialog">
         <button class="closebutton">X</button>
         <h1 class="title">Oops!</h1>
         <h1>This student is not allowed to be part of the Inquisitorial Squad!</h1>
       </div>
     </div>
+    <div id="hackwarning" class="warning hidden">
+      <div class="dialog">
+        <button class="closebuttonhack">X</button>
+        <h1 class="title">Oops!</h1>
+        <h1>This student can not be expelled!</h1>
+      </div>
+    </div>
+
+    <button class="hack">Hack</button>
     <!-- </template> -->
     <script src="script.js"></script>
   </body>
