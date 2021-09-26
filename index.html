@@ -40,22 +40,24 @@
 
       <template id="student">
         <!-- <tr data-field="studentcard" data-name="nothing"> -->
-        <tr data-field="studentcard">
-          <td data-field="image"><img src="" class="image" /></td>
-
-          <td data-field="prefect" data-prefect="false"></td>
-          <td data-field="squad" data-squad="false" class="squad"></td>
-
-          <td data-field="name">NAME</td>
-          <td data-field="type">TYPE</td>
-          <td data-field="desc">DESCRIPTION</td>
-          <td data-field="house">HOUSE</td>
-          <td data-field="nickname">NICKNAME</td>
-          <td id="expelll" data-field="status" data-status="false"></td>
+        <div data-field="studentcard" class="studentcard">
+          <div data-field="image"><img src="" class="image" /></div>
+          <div class="icons">
+            <div data-field="prefect" data-prefect="false" class="prefect"></div>
+            <div data-field="squad" data-squad="false" class="squad"></div>
+          </div>
+          <div class="infotempl">
+            <div class="center" data-field="name">NAME</div>
+            <div class="center" data-field="type">TYPE</div>
+            <div class="center" data-field="desc">DESCRIPTION</div>
+            <!-- <div class="center" data-field="house">HOUSE</div> -->
+            <div class="center" data-field="nickname">NICKNAME</div>
+            <div class="center" id="expelll" data-field="status" data-status="false"></div>
+          </div>
           <!-- <button id="expell"></button> -->
 
           <!-- <td data-field="imagehouse"><img src="" class="imagehouse" /></td> -->
-        </tr>
+        </div>
         <!-- <button data-field="details">See details</button> -->
       </template>
       <div id="remove_other" class="warning hidden">
@@ -87,7 +89,7 @@
     <aside>
       <input class="searchbar" type="text" placeholder="Search" />
       <div class="expelledcontainer">
-        <p class="title">Filter by:</p>
+        <p class="titlefilter">Filter by:</p>
 
         <button class="expelled filter" data-action="filter" data-filter="expelled">Expelled</button>
         <button class="unexpelled filter" data-action="filter" data-filter="unexpelled">Unexpelled</button>
@@ -122,7 +124,7 @@
         <span class="checkexp"></span>
         <p data-field="inq">Inqusitioral squad</p>
         <span class="checkinq"></span>
-        <p data-field="prefect">Prefect</p>
+        <p data-field="prefectt">Prefect</p>
         <span class="checkpre"></span>
       </div>
       <!-- <p data-field="status" data-status="false"><button id="expell">Expell</button></p> -->
@@ -134,7 +136,7 @@
       <div class="dialog">
         <button class="closebutton">X</button>
         <h1 class="title">Oops!</h1>
-        <h1>This student is not allowed to be part of the Inquisitorial Squad!</h1>
+        <p>This student is not allowed to be part of the Inquisitorial Squad!</p>
       </div>
     </div>
     <div id="hackwarning" class="warning hidden">

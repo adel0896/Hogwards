@@ -24,7 +24,6 @@ const meStudent = {
 function start() {
   console.log("ready");
   registerButtons();
-  // registerCards();
   loadJSON();
 }
 function registerButtons() {
@@ -59,7 +58,6 @@ function prepareObjects(jsonData1, jsonData2) {
 
   jsonData1.forEach((elem) => {
     console.log(elem);
-    // TODO: Create new object with cleaned data - and store that in the allAnimals array
     const Student = {
       firstname: "",
       lastname: "",
@@ -74,7 +72,6 @@ function prepareObjects(jsonData1, jsonData2) {
       gender: "",
     };
     const student = Object.create(Student);
-    // document.querySelector(".hack").addEventListener("click", hackit(student));
     console.log(student);
     console.log(Student);
     let fullname = elem.fullname.trim();
@@ -82,16 +79,13 @@ function prepareObjects(jsonData1, jsonData2) {
     let pureblood = elem.pure;
     let gender = elem.gender;
     console.log(pureblood);
-    // let halfblood = elem.half;
     console.log(fullname);
     //The first name
     let firstname = (student.firstname = fullname.substring(fullname.lastIndexOf(), fullname.indexOf(" ")));
     console.log(fullname.indexOf(" "));
-    // console.log(fullname.length);
     if (fullname.indexOf(" ") >= 0) {
       console.log(fullname.indexOf(firstname));
       student.firstname = student.firstname.substring(0, 1).toUpperCase() + student.firstname.substring(1).toLowerCase();
-      // student.firstname = firstname[0].toUpperCase() + firstname.substring(1).toLowerCase();
       console.log(firstname);
     } else {
       console.log("not 0");
@@ -102,7 +96,6 @@ function prepareObjects(jsonData1, jsonData2) {
 
     //The last name
     let lastname = (student.lastname = fullname.substring(fullname.lastIndexOf(" ") + 1));
-    // student.lastname = student.lastname.substring(0, 1).toUpperCase() + student.lastname.substring(1).toLowerCase();
 
     const array = Object.values(jsonData2);
     for (let i = 0; i < 2; i++) {
@@ -293,25 +286,17 @@ function displayStudent(student) {
   const clone = document.querySelector("template#student").content.cloneNode(true);
 
   // set clone data
-  // clone.querySelector("[data-name=nothing]").textContent = student.firstname;
 
   clone.querySelector("[data-field=name]").textContent = student.firstname;
   clone.querySelector("[data-field=desc]").textContent = student.lastname;
   clone.querySelector("[data-field=type]").textContent = student.middlename;
   clone.querySelector("[data-field=nickname]").textContent = student.nickname;
-  clone.querySelector("[data-field=house]").textContent = student.house;
+  // clone.querySelector("[data-field=house]").textContent = student.house;
   clone.querySelectorAll("[data-field=image]").forEach((card) => card.addEventListener("click", selectStudent));
   clone.querySelector("[data-field=status]").dataset.status = student.status;
   clone.querySelector("[data-field=status]").addEventListener("click", expellStudents);
-  // clone.querySelector("[data-field=status]").addEventListener("click", changestatus);
-  // function changestatus() {
-  //   let expelbtn = clone.querySelector("#expelll");
-  //   if (student.status === true) {
-  //     expelbtn.textContent = "unexpell";
-  //   } else {
-  //     expelbtn.textContent = "expell";
-  //   }
-  // }
+
+  //expelling
   function expellStudents() {
     let expelbtn = document.querySelector("[data-field=status]");
     if (student.status === true) {
@@ -328,29 +313,23 @@ function displayStudent(student) {
         console.log("closepop works");
         document.querySelector("#hackwarning").classList.add("hidden");
       }
-      // popuphack();
     } else {
       student.status = true;
     }
 
     builtList();
   }
-  // function popuphack() {
-  //   console.log("pop up works");
-  //   closePop();
-  // }
 
   if (student.house === "Slytherin") {
-    clone.querySelector("tr").style.border = "solid #0d6217";
+    clone.querySelector("[data-field=studentcard]").style.border = "solid #0d6217";
   } else if (student.house === "Gryffindor") {
-    clone.querySelector("tr").style.border = "solid #7f0909";
+    clone.querySelector("[data-field=studentcard]").style.border = "solid #7f0909";
   } else if (student.house === "Hufflepuff") {
-    clone.querySelector("tr").style.border = "solid rgb(209, 179, 9)";
+    clone.querySelector("[data-field=studentcard]").style.border = "solid rgb(209, 179, 9)";
   } else if (student.house === "Ravenclaw") {
-    clone.querySelector("tr").style.border = "solid #000a90";
+    clone.querySelector("[data-field=studentcard]").style.border = "solid #000a90";
   }
   //images-----
-  // clone.querySelector("[data-field=imagehouse] img").src = `images/${student.house.toLowerCase()}.png`;
 
   if (student.lastname.includes("-")) {
     clone.querySelector("[data-field=image] img").src = `images/${student.lastname.substring(student.lastname.indexOf("-") + 1).toLowerCase()}_${student.firstname[0].toLowerCase()}.png`;
@@ -362,6 +341,7 @@ function displayStudent(student) {
   ////making the pop up
   function selectStudent(event) {
     console.log(event);
+    //Giving the modal different background colors and house images
     const modal = document.querySelector(".box");
     if (student.house === "Slytherin") {
       document.querySelectorAll(".data [data-field]").forEach((element) => (element.style.color = "rgb(209, 179, 9)"));
@@ -381,7 +361,6 @@ function displayStudent(student) {
       document.querySelectorAll(".statuses span, .statuses [data-field]").forEach((element) => (element.style.color = "#7f0909"));
 
       document.querySelector(".close").style.color = "#7f0909";
-      // modal.style.color = "black";
     } else if (student.house === "Ravenclaw") {
       modal.style.background = "#0c005a";
       document.querySelectorAll(".statuses span, .statuses [data-field]").forEach((element) => (element.style.color = "rgb(209, 179, 9)"));
@@ -391,7 +370,7 @@ function displayStudent(student) {
       document.querySelectorAll(".data [data-field]").forEach((element) => (element.style.color = "rgb(209, 179, 9)"));
     }
     modal.classList.remove("hide");
-
+    //modal information
     modal.querySelector("[data-field=imagepop]").src = `images/${student.lastname.substring(student.lastname.indexOf("-") + 1).toLowerCase()}_${student.firstname[0].toLowerCase()}.png`;
     modal.querySelector("[data-field=imagehousepop]").src = `images/${student.house.toLowerCase()}.png`;
 
@@ -403,6 +382,7 @@ function displayStudent(student) {
     modal.querySelector("[data-field=gender]").textContent = "Gender: " + student.gender;
 
     modal.querySelector(".close").addEventListener("click", closepop);
+    //the status check on the modal
     let expelstatus = document.querySelector(".checkexp");
     let inqstatus = document.querySelector(".checkinq");
     let prefectstatus = document.querySelector(".checkpre");
@@ -423,7 +403,6 @@ function displayStudent(student) {
     }
     function closepop() {
       modal.classList.add("hide");
-      //remove event listeners here
     }
     //for bloodtype
     let bloodstatus = document.querySelector("[data-field=bloodtype]");
@@ -431,9 +410,11 @@ function displayStudent(student) {
       bloodstatus.textContent = "Blood-status: Half";
     } else if (student.blood === "pure") {
       bloodstatus.textContent = "Blood-status: Pure";
+    } else {
+      bloodstatus.textContent = "Blood-status: muggle";
     }
   }
-  //the prefects
+  //the prefects (and squads)
 
   clone.querySelector("[data-field=prefect]").dataset.prefect = student.prefect;
   clone.querySelector("[data-field=prefect]").addEventListener("click", clickPrefect);
@@ -442,11 +423,10 @@ function displayStudent(student) {
       student.prefect = false;
     } else {
       tryToMakeAPrefect(student);
-      // student.prefect = true;
     }
     builtList();
   }
-  //////squad
+  //////-----------squad
   clone.querySelector("[data-field=squad]").dataset.squad = student.squad;
   clone.querySelector("[data-field=squad]").addEventListener("click", makeSquadSlytherin);
 
@@ -482,6 +462,7 @@ function displayStudent(student) {
   // append clone to list
   document.querySelector("#list tbody").appendChild(clone);
 }
+//----prefects
 function tryToMakeAPrefect(selectedstudent) {
   const prefects = allStudents.filter((student) => student.prefect === true);
   const numberOfPrefects = prefects.length;
@@ -496,12 +477,7 @@ function tryToMakeAPrefect(selectedstudent) {
   } else {
     makePrefect(selectedstudent);
   }
-  // console.log(`there are ${numberOfPrefects} prefects`);
-  // // console.log(`the other prefect of this type is ${other.firstname}`);
-  // console.log(other);
 
-  //just for testing
-  // makePrefect(selectedstudent);
   function removeOther(other) {
     //ask user to ignore or remove the other
     document.querySelector("#remove_other").classList.remove("hidden");
@@ -564,31 +540,31 @@ function tryToMakeAPrefect(selectedstudent) {
     student.prefect = true;
   }
 }
-//hacking
+//--------------hacking
+let clicked = true;
+console.log(clicked);
 document.querySelector(".hack").addEventListener("click", hackit);
-function hackit(student) {
+function hackit() {
   // console.log(student);
+  allStudents.forEach(randomBloodStatus);
   allStudents.push(meStudent);
   builtList();
-  let bloodstatus = document.querySelector(".box [data-field=bloodtype]");
-  if (student.blood === "half") {
-    bloodstatus.textContent = "Blood-status: Pure";
-  } else if (student.blood === "pure") {
-    bloodstatus.textContent = "Blood-status: Half";
+  if (clicked === true) {
+    clicked = false;
+    document.querySelector(".hack").removeEventListener("click", hackit);
+
+    console.log(clicked);
   }
 }
-
-//trying the pop up------does not do the event listener for some reason
-// function registerCards() {
-//   console.log("register cards works");
-//   document.querySelectorAll("[data-field= studentcard]").forEach((card) => card.addEventListener("click", selectStudent));
-//   // document.querySelector("[data-field= studentcard]").addEventListener("click", selectStudent);
-
-//   // console.log(ca);
-// }
-// function selectStudent(event) {
-//   console.log("select student works");
-//   alert("it works");
-//   const card = event.target.dataset.studentcard;
-//   console.log(`user selected ${card}`);
-// }
+function randomBloodStatus(student) {
+  console.log(student);
+  if (student.blood === "pure") {
+    const types = ["Muggle-blood", "half"];
+    const randomNumber = Math.floor(Math.random() * 2);
+    student.blood = types[randomNumber];
+    console.log(student.blood);
+  } else if (student.blood === "half") {
+    student.blood = "Pure-blood";
+    console.log(student.blood);
+  }
+}

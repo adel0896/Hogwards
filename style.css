@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Rye&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap");
 /* --------------colors----------- */
 /* .modal[data-house="Gryffindor"] {
   --primary-color: #7f0909;
@@ -38,7 +39,7 @@ main {
   width: 100%;
 }
 p {
-  font-family: sans-serif;
+  font-family: Playfair;
   color: rgb(209, 179, 9);
   font-size: 1.2vw;
   padding-left: 3vw;
@@ -48,6 +49,12 @@ p {
   padding: 1vw;
   padding-top: 3vw;
   padding-left: 3vw;
+}
+.titlefilter {
+  font-size: 2vw;
+  padding: 1vw;
+  padding-top: 3vw;
+  /* padding-left: 3vw; */
 }
 .filtersline {
   text-align: center;
@@ -67,12 +74,16 @@ tbody {
   grid-row-gap: 1rem;
   justify-content: center;
 }
-tbody tr {
+tbody[data-field="studentcard"] {
   display: flex;
   flex-direction: column;
   justify-self: center;
   text-align: center;
+
   /* border: solid rgb(209, 179, 9); */
+}
+.studentcard {
+  padding: 1vw;
 }
 aside {
   grid-column-start: 1;
@@ -91,6 +102,9 @@ h1 {
   padding: 2vw;
   padding-top: 0.5vw;
   color: rgb(209, 179, 9);
+}
+.center {
+  text-align: center;
 }
 button {
   background-color: transparent;
@@ -112,10 +126,13 @@ button:hover {
   padding: 0;
   text-align: start;
 }
+.sortbutt button {
+  padding: 1vw;
+}
 .border {
   border: solid rgb(209, 179, 9);
 }
-td {
+.studentcard div {
   color: rgb(209, 179, 9);
   padding-top: 0.5vw;
   padding-left: 1vw;
@@ -123,28 +140,28 @@ td {
   cursor: pointer;
   pointer-events: auto;
 }
-td[data-field="status"]::before {
+[data-field="status"]::before {
   content: "Expell";
   font-family: Rye;
 }
-td[data-field="status"]:hover {
+[data-field="status"]:hover {
   border: solid rgb(209, 179, 9);
 }
-td[data-field="status"][data-status="true"]::before {
+[data-field="status"][data-status="true"]::before {
   content: "Unexpell ";
 }
 /* prefect */
-td[data-field="prefect"]::after {
+[data-field="prefect"]::after {
   content: "🎖️";
 }
-td[data-field="prefect"][data-prefect="false"]::after {
+[data-field="prefect"][data-prefect="false"]::after {
   filter: grayscale(1);
 }
 /* squad */
-td[data-field="squad"]::after {
+[data-field="squad"]::after {
   content: "⭐";
 }
-td[data-field="squad"][data-squad="false"]::after {
+[data-field="squad"][data-squad="false"]::after {
   filter: grayscale(1);
   cursor: pointer;
 }
@@ -166,6 +183,9 @@ th {
   flex-direction: column;
   padding-top: 9vw;
   padding-left: 2vw;
+}
+.expelledcontainer button {
+  padding: 1vw;
 }
 label {
   font-size: 1.2vw;
@@ -276,7 +296,7 @@ span {
   grid-row-start: 1;
   padding: 0;
 }
-[data-field="prefect"] {
+[data-field="prefectt"] {
   grid-column-start: 3;
   grid-row-start: 1;
   padding: 0;
@@ -289,7 +309,25 @@ span {
 .icons {
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 .image {
   width: 10vw;
+}
+.squad {
+  font-size: 1.5vw;
+}
+.prefect {
+  font-size: 1.5vw;
+}
+.infotempl {
+  display: flex;
+  flex-direction: column;
+}
+#expelll {
+  justify-self: end;
+  padding: 1vw;
+}
+#notAllowed .dialog {
+  width: 30vw;
 }
